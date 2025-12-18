@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Model weights and checkpoints
+*.pth
+*.ckpt
+*.pt
+
+# Training logs
+*.log
+logs/
+nohup.out
+
+# Dataset
+dataset/
+DCASE2018/
+
+# Model subdirectories (keep only root folders)
+PANN/*
+!PANN/.gitkeep
+ssamba/*
+!ssamba/.gitkeep
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Artifacts (development only)
+.gemini/
+
+# Temporary files
+*.tmp
+temp/
