@@ -19,8 +19,8 @@ logs/
 nohup.out
 
 # Dataset
-dataset/
-DCASE2018/
+dataset/*
+!dataset/.gitkeep
 
 # Model subdirectories (keep only root folders)
 PANN/*
