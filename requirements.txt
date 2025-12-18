@@ -1,0 +1,8 @@
+# Few-Shot Learning for DCASE2018 Task 5
+# Python 3.12 compatible
+
+torch>=2.0.0
+torchaudio>=2.0.0
+numpy>=1.24.0
+librosa>=0.10.0
+soundfile>=0.12.0
