@@ -9,7 +9,8 @@
 |--------|-------|-------------|----------|
 | **Transductive FT** | SSAMBA | 768D | **75.87%** |
 | **PANNS (最佳)** | CNN | 2048D | **87.02%** |
-| SSAMBA 2048D | Mamba | 2048D | **82.18%** |
+| SSAMBA 2048D v2 | Mamba | 2048D | **84.98%** |
+| SSAMBA 2048D v1 | Mamba | 2048D | 82.18% |
 | Prototypical | SSAMBA | 768D | 64.00% |
 
 **关键发现**：

@@ -10,7 +10,8 @@ A comprehensive study of Few-Shot Learning methods for environmental audio class
 |--------|-------|-------------|----------|
 | **Transductive FT** | SSAMBA | 768D | **75.87%** |
 | **PANNS (Best)** | CNN | 2048D | **87.02%** |
-| SSAMBA 2048D | Mamba | 2048D | **82.18%** |
+| SSAMBA 2048D v2 | Mamba | 2048D | **84.98%** |
+| SSAMBA 2048D v1 | Mamba | 2048D | 82.18% |
 | Prototypical | SSAMBA | 768D | 64.00% |
 
 **Key Findings**:
@@ -256,18 +257,29 @@ python ssamba_transductive.py \
 
 ### Experiment 7: SSAMBA 2048D Multi-Layer Fusion
 
-**Objective**: Enhance SSAMBA with multi-layer features (L8+16+24 → 2048D)
+**Objective**: Enhance SSAMBA with multi-layer features (L12+17+24 → 2048D)
 
+**v1 Configuration** (Layers 8+16+24, freeze_layers=16):
 ```bash
 python ssamba_transductive_2048d.py \
   --freeze_layers 16 \
   --num_epochs 50 \
   --episodes_per_epoch 50 \
   --eval_episodes 30 \
-  --save_path ssamba_2048d.pth
+  --save_path ssamba_2048d_v1.pth
 ```
+**Result**: 82.18% (2/3 layers frozen)
 
-**Result**: 82.18% (+6.31% over 768D baseline, but still -4.84% below PANNS)
+**v2 Configuration** (Layers 12+17+24, freeze_layers=16):
+```bash
+python ssamba_transductive_2048d.py \
+  --freeze_layers 16 \
+  --num_epochs 50 \
+  --episodes_per_epoch 50 \
+  --eval_episodes 30 \
+  --save_path ssamba_2048d_v2.pth
+```
+**Result**: **84.98%** (+2.80% over v1, only 1/3 layers frozen)
 
 ---
 
