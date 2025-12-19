@@ -379,8 +379,8 @@ FSL-EAC/
 | Configuration | Feature Extraction | Dimension | Accuracy | Improvement |
 |--------------|-------------------|-----------|----------|-------------|
 | Baseline | Layer 24 only | 768D | 75.87% | — |
-| Multi-Layer | Layers 8+16+24 | 2048D | 82.18% | **+6.31%** |
-
+| Multi-Layer v1 | Layers 8+16+24 | 2048D | 82.18% | **+6.31%** |
+| Multi-Layer v2 | Layers 12+17+24 | 2048D | 84.98% | **+9.11%** |
 ---
 
 
