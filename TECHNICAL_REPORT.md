@@ -46,9 +46,9 @@ This report documents a comprehensive study of Few-Shot learning methods for aud
 | 1. SAMBA Transductive FT | SSAMBA | 768D | 16.8M (17.2%) | ✅ 4× | Transductive | **75.87%** |
 | 2. No Aug | SSAMBA | 768D | 16.8M (17.2%) | ❌ | Transductive | **68.09%** |
 | 3. Prototypical | SSAMBA | 768D | 16.8M (17.2%) | ✅ 4× | Prototypical | **64.00%** |
-| 4. PANNS Baseline | PANNS (CNN) | 2048D | 42.0M (76.3%) | ✅ 4× | Transductive | **87.02%** |
-| 5. PANNS 768D | PANNS (CNN) | 768D | 42.0M (76.3%) | ✅ 4× | Transductive | **86.58%** |
-| 6. SSAMBA Matched | SSAMBA | 768D | 44.0M (45.1%) | ✅ 4× | Transductive | **85.47%** |
+| 4. PANNS Baseline | PANNS (CNN) | 2048D | 37.8M (47.4%) | ✅ 4× | Transductive | **87.02%** |
+| 5. PANNS 768D | PANNS (CNN) | 768D | 39.3M (51.0%) | ✅ 4× | Transductive | **86.58%** |
+| 6. SSAMBA Matched | SSAMBA | 768D | 40.8M (41.9%) | ✅ 4× | Transductive | **85.47%** |
 | 7. SSAMBA 2048D v1 | SSAMBA | 2048D (L8+16+24) | 37.5M (36.7%) | ✅ 4× | Transductive | **82.18%** |
 | 8. SSAMBA 2048D v2 | SSAMBA | 2048D (L12+17+24) | 37.5M (36.7%) | ✅ 4× | Transductive | **84.98%** |
 
