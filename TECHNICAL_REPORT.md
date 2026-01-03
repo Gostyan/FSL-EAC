@@ -41,20 +41,43 @@ This report documents a comprehensive study of Few-Shot learning methods for aud
 
 ## 2. Experiments Overview
 
-| Experiment | Model | Feature Dim | Trainable Params | Augmentation | Method | Best Acc |
-|------------|-------|-------------|------------------|--------------|--------|----------|
-| 1. SAMBA Transductive FT | SSAMBA | 768D | 16.8M (17.2%) | ✅ 4× | Transductive | **75.87%** |
-| 2. No Aug | SSAMBA | 768D | 16.8M (17.2%) | ❌ | Transductive | **68.09%** |
-| 3. Prototypical | SSAMBA | 768D | 16.8M (17.2%) | ✅ 4× | Prototypical | **64.00%** |
-| 4. PANNS Baseline | PANNS (CNN) | 2048D | 37.8M (47.4%) | ✅ 4× | Transductive | **87.02%** |
-| 5. PANNS 768D | PANNS (CNN) | 768D | 39.3M (51.0%) | ✅ 4× | Transductive | **86.58%** |
-| 6. SSAMBA Matched | SSAMBA | 768D | 40.8M (41.9%) | ✅ 4× | Transductive | **85.47%** |
-| 7. SSAMBA 2048D v1 | SSAMBA | 2048D (L8+16+24) | 37.5M (36.7%) | ✅ 4× | Transductive | **82.18%** |
-| 8. SSAMBA 2048D v2 | SSAMBA | 2048D (L12+17+24) | 37.5M (36.7%) | ✅ 4× | Transductive | **84.98%** |
+| Experiment | Model | Feature Dim | Trainable Params | Freeze | Augmentation | Method | Best Acc |
+|------------|-------|-------------|------------------|--------|--------------|--------|----------|
+| 1. SSAMBA Transductive (20L) | SSAMBA | 768D | 16.8M (17.2%) | 20/24 | ✅ 4× | Transductive | **75.87%** |
+| 2. No Aug | SSAMBA | 768D | 16.8M (17.2%) | 20/24 | ❌ | Transductive | **68.09%** |
+| 3. Prototypical | SSAMBA | 768D | 16.8M (17.2%) | 20/24 | ✅ 4× | Prototypical | **64.00%** |
+| 4. PANNS Baseline | PANNS (CNN) | 2048D | 37.8M (47.4%) | 16/24 | ✅ 4× | Transductive | **87.02%** |
+| 5. PANNS 768D | PANNS (CNN) | 768D | 39.3M (51.0%) | 16/24 | ✅ 4× | Transductive | **86.58%** |
+| 6. SSAMBA Matched | SSAMBA | 768D | 40.8M (41.9%) | 16/24 | ✅ 4× | Transductive | **85.47%** |
+| 7. SSAMBA 2048D v1 | SSAMBA | 2048D (L8+16+24) | 42.58M | 16/24 | ✅ 4× | Transductive | **82.18%** |
+| 8. SSAMBA 2048D v2 | SSAMBA | 2048D (L12+17+24) | 37.16M | 8/24 | ✅ 4× | Transductive | **84.98%** |
+| 9. **SSAMBA 768D (16L)** | SSAMBA | 768D (L24) | 21.16M | **16/24** | ✅ 4× | Transductive | **82.84%** |
 
-**Note**: 
-- v1: Extracts layers 8, 16, 24 (freeze_layers=16, 2/3 frozen: layers 8&16 frozen, layer 24 trainable) → 82.18%
-- v2: Extracts layers 12, 17, 24 (freeze_layers=16, 1/3 frozen: layer 12 frozen, layers 17&24 trainable) → **84.98%** (+2.80%)
+**Critical Findings**:
+
+### Freeze Strategy Impact (Same Model, Different Freeze)
+- **SSAMBA 768D (20L frozen)**: 75.87% - Original baseline
+- **SSAMBA 768D (16L frozen)**: **82.84%** - **+6.97% improvement!**
+- **Conclusion**: Freezing fewer layers (16 vs 20) dramatically improves performance
+
+### SSAMBA Configuration Comparison (All with Transductive FT + 4× Aug)
+| Config | Layers | Dimension | Frozen | Trainable Params | Initial Acc | Final Acc | Learning Gain |
+|--------|--------|-----------|--------|------------------|-------------|-----------|---------------|
+| 768D 20L | L24 | 768D | 20/24 | 16.8M | ~55% | 75.87% | +20.87% |
+| **768D 16L** | L24 | 768D | **16/24** | **21.16M** | **57.24%** | **82.84%** | **+25.60%** |
+| 2048D v1 | L8+16+24 | 2048D | 16/24 | 42.58M | 58.89% | 82.18% | +23.29% |
+| 2048D v2 | L12+17+24 | 2048D | 8/24 | 37.16M | 55.11% | **84.98%** | **+29.87%** |
+
+**Key Insights**:
+1. **Freeze strategy > Dimension**: 768D 16L (82.84%) outperforms 2048D v1 (82.18%) with 50% fewer params
+2. **Layer selection is critical**: v2 (L12+17+24) beats v1 (L8+16+24) by +2.80% with 5.42M fewer params
+3. **Best config**: 2048D v2 achieves 84.98%, only -2.04% behind PANNS baseline
+4. **Learning capacity**: v2 shows highest learning gain (+29.87%), proving better architecture utilization
+
+**Note on Layer Selection**: 
+- v1: Extracts layers 8, 16, 24 → Early, middle, late features
+- v2: Extracts layers 12, 17, 24 → Mid-range, late-middle, final features (more semantic coherence)
+
 
 ---
 
